@@ -1,0 +1,19 @@
+python Kmeans.py visualize --dist_type gaussian --dim 2 --num_points 10000
+
+
+python Kmeans.py visualize --dist_type exponential --dim 3 --num_points 5000
+
+python Kmeans.py compare --dist_type gaussian --dim 2 --k 3 --num_points 10000 --n_runs 10
+
+
+python Kmeans.py visualize algos --dist_type gaussian --dim 2 --k 3 --num_points 10000
+
+
+python Kmeans.py minibatch --dist_type gaussian --dim 2 --k 3 --num_points 10000 --batch_size 100
+
+python Kmeans.py find_best_k --dist_type gaussian --dim 2 --num_points 10000 --max_k 10
+
+python Kmeans.py visualize --dist_type exponential --dim 1 --num_points 2000
+
+python Kmeans.py visualize --dist_type gaussian --dim 4 --num_points 1000
+
