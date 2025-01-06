@@ -1,12 +1,11 @@
 python Kmeans.py visualize --dist_type gaussian --dim 2 --num_points 10000
 
-
 python Kmeans.py visualize --dist_type exponential --dim 3 --num_points 5000
 
 python Kmeans.py compare --dist_type gaussian --dim 2 --k 3 --num_points 10000 --n_runs 10
 
 
-python Kmeans.py visualize algos --dist_type gaussian --dim 2 --k 3 --num_points 10000
+python Kmeans.py visualize_algos --dist_type gaussian --dim 2 --k 3 --num_points 10000
 
 
 python Kmeans.py minibatch --dist_type gaussian --dim 2 --k 3 --num_points 10000 --batch_size 100
@@ -17,3 +16,26 @@ python Kmeans.py visualize --dist_type exponential --dim 1 --num_points 2000
 
 python Kmeans.py visualize --dist_type gaussian --dim 4 --num_points 1000
 
+----------------------------------------------------------- 
+TP2:
+le meilleur k:
+Pour le vin rouge: (4)
+méthode de coude -> 3 à 4
+méthode de la silhouette -> 2 ou 4
+Pour le vin blanc: (3)
+méthode de coude -> 4 à 5
+méthode de la silhouette -> 2 ou 3
+Description des clusters pour le vin rouge :
+         fixed acidity  volatile acidity  citric acid  residual sugar  chlorides  free sulfur dioxide  total sulfur dioxide   density        pH  sulphates   alcohol
+Cluster
+0            -0.649075          0.455418    -0.759620       -0.230401  -0.189454            -0.226387             -0.351925 -0.450675  0.613254  -0.288718  0.066703
+1             1.003989         -0.685689     1.020772        0.031050   0.276163            -0.476860             -0.481687  0.438441 -0.752072   0.554620  0.282591
+2            -0.094321          0.041076     0.096048        0.402034  -0.004928             1.074228              1.322391  0.280773 -0.173946  -0.186573 -0.506721
+
+Description des clusters pour le vin blanc :
+         fixed acidity  volatile acidity  citric acid  residual sugar  chlorides  free sulfur dioxide  total sulfur dioxide   density        pH  sulphates   alcohol
+Cluster
+0            -0.748909         -0.005090    -0.375723       -0.596509  -0.267680            -0.223826             -0.378204 -0.655193  0.786873   0.236224  0.513568
+1             0.137527          0.027567     0.205732        1.007915   0.145913             0.652369              0.821251  1.049342 -0.196347   0.073843 -0.831890
+2            -0.191198          0.387911     0.885982       -0.348253   5.350755             0.285525              0.134469  0.122129 -0.608126  -0.222241 -0.770350
+3             0.691336         -0.054740     0.116104       -0.478487  -0.262165            -0.528483             -0.541030 -0.495462 -0.606909  -0.333529  0.448658

@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 from time import time
 from sklearn.metrics import silhouette_score
 
-# Function definitions (same as before)
-
 
 def generate_gaussian_data(centers, num_points, dim):
     data = []
@@ -205,8 +203,6 @@ def plot_cluster_comparison(data, dim, dist, k=3):
     plt.tight_layout()
     plt.show()
 
-# Mini-Batch K-Means
-
 
 def mini_batch_kmeans(data, k, batch_size=100, max_iters=100):
     n_samples, n_features = data.shape
@@ -216,12 +212,17 @@ def mini_batch_kmeans(data, k, batch_size=100, max_iters=100):
         idx = np.random.choice(n_samples, batch_size, replace=False)
         mini_batch = data[idx]
         distances = np.sqrt(
-            ((mini_batch - centroids[:, np.newaxis])**2).sum(axis=2))
+            ((mini_batch - centroids[:, np.newaxis]) ** 2).sum(axis=2))
         labels = np.argmin(distances, axis=0)
-        new_centroids = np.array(
-            [mini_batch[labels == i].mean(axis=0) for i in range(k)])
+
+        new_centroids = centroids.copy()
+        for i in range(k):
+            cluster_points = mini_batch[labels == i]
+            if len(cluster_points) > 0:
+                new_centroids[i] = cluster_points.mean(axis=0)
+
         centroids = new_centroids
-        sse = np.sum(np.min(distances, axis=0)**2)
+        sse = np.sum(np.min(distances, axis=0) ** 2)
         sse_history.append(sse)
     return centroids, labels, sse_history
 
@@ -282,7 +283,7 @@ def main():
         data = generate_exponential_data(scales, args.num_points, args.dim)
     if args.task == "visualize":
         plot_data(data, args.dim,
-                  title=f"Generated {args.dist_type.capitalize()} Data")
+                  title=f"Generation de {args.dist_type.capitalize()} Data")
 
     if args.task == 'compare':
         results = compare_kmeans_algorithms(data, k=args.k, n_runs=args.n_runs)
@@ -296,14 +297,11 @@ def main():
                 f"Average Iterations: {np.mean(results[algo]['iterations']):.2f}")
             print(f"Average SSE: {np.mean(results[algo]['final_sse']):.2f}")
 
-        # Plot SSE history for both K-Means and K-Means++
         plt.figure(figsize=(10, 6))
 
-        # Plot SSE for K-Means
         plt.plot(results['kmeans']['final_sse'],
                  label='K-Means SSE', color='b', marker='o')
 
-        # Plot SSE for K-Means++
         plt.plot(results['kmeans++']['final_sse'],
                  label='K-Means++ SSE', color='r', marker='x')
 
